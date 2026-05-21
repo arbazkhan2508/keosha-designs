@@ -1,26 +1,213 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FCFAF6; /* Soft warm luxury white */
+  --foreground: #1A1A1A; /* Rich charcoal black */
+  --primary-gold: #C5A059; /* Soft antique gold */
+  --primary-gold-hover: #B48E47;
+  --luxury-cream: #FAF8F5; /* Warm off-white background */
+  --luxury-sand: #F0EDE6; /* Warm sand background */
+  --luxury-charcoal: #2A2A2A; /* Deep dark charcoal for contrast */
+  --luxury-dark-blue: #1A2835; /* Elegant dark navy from Sarita Handa */
+  --luxury-clay: #7A6F62; /* Earthy muted brown */
+  --border-color: #E6E2D8; /* Delicate warm border */
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-gold: var(--primary-gold);
+  --color-gold-hover: var(--primary-gold-hover);
+  --color-cream: var(--luxury-cream);
+  --color-sand: var(--luxury-sand);
+  --color-charcoal: var(--luxury-charcoal);
+  --color-navy: var(--luxury-dark-blue);
+  --color-clay: var(--luxury-clay);
+  --color-luxury-border: var(--border-color);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: var(--font-della-respira), "Della Respira", Georgia, serif;
+  --font-sans: "Avenir", "Avenir Next", var(--font-montserrat), sans-serif;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--luxury-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C5A05960;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-gold);
+}
+
+/* Custom Animations & Transitions */
+.transition-luxury {
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-scroll-line {
+  animation: scrollLine 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hover-image-zoom {
+  overflow: hidden;
+}
+
+.hover-image-zoom img {
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hover-image-zoom:hover img {
+  transform: scale(1.04);
+}
+
+/* Sliding underline animation for links */
+.luxury-link {
+  position: relative;
+}
+
+.luxury-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary-gold);
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.luxury-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Primary Luxury Button */
+.btn-luxury {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: 1px solid var(--foreground);
+  background-color: transparent;
+  color: var(--foreground);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1;
+}
+
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--foreground);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+
+.btn-luxury:hover {
+  color: var(--background);
+}
+
+.btn-luxury:hover::before {
+  width: 100%;
+}
+
+/* Secondary Gold Luxury Button */
+.btn-luxury-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: 1px solid var(--primary-gold);
+  background-color: var(--primary-gold);
+  color: white;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1;
+}
+
+.btn-luxury-gold:hover {
+  background-color: var(--luxury-charcoal);
+  border-color: var(--luxury-charcoal);
+}
+
+/* Hide navigation default scrollbar in slider */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
