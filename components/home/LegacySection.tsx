@@ -20,12 +20,12 @@ export const LegacySection: React.FC = () => {
                 <div className="max-w-[560px]">
 
                     {/* Heading */}
-                    <h2 className="font-serif text-[#1F2430] text-md  lg:text-4xl leading-[1.02] tracking-[-0.04em]">
+                    <h2 className="font-serif text-[#1F2430] text-2xl md:text-3xl lg:text-4xl leading-tight tracking-[-0.04em]">
                         The Making of a Legacy
                     </h2>
 
                     {/* Description */}
-                    <p className="mt-8 max-w-[420px] text-[#3B404A] text-sm lg:text-base leading-[1.55] font-light tracking-[0.01em]">
+                    <p className="mt-8 max-w-[420px] text-[#3B404A] text-sm md:text-base leading-[1.55] font-light tracking-[0.01em]">
                         Explore the heart of the brand—our makers, our mission, our method.
                     </p>
 
@@ -34,7 +34,7 @@ export const LegacySection: React.FC = () => {
 
                         <Link
                             href="/legacy"
-                            className="group inline-flex items-center gap-4 uppercase text-[#2A2F39] text-sm lg:text-base tracking-[0.14em] font-light"
+                            className="group inline-flex items-center gap-4 uppercase text-[#2A2F39] text-xs md:text-sm tracking-[0.14em] font-light"
                         >
                             <span>
                                 Know More

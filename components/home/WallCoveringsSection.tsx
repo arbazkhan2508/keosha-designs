@@ -35,7 +35,7 @@ export const WallCoveringsSection: React.FC = () => {
             <div className="px-5 md:px-8 lg:px-10 pt-10 md:pt-12">
 
                 {/* Heading */}
-                <h2 className="font-serif text-[#25231F] text-[32px] md:text-[44px] lg:text-[58px] leading-[1.06] tracking-[-0.03em]">
+                <h2 className="font-serif text-[#25231F] text-2xl md:text-3xl lg:text-4xl leading-tight tracking-[-0.03em]">
                     A New Era of Ultra-Luxury: Embroidered Wall Coverings
                 </h2>
 
@@ -63,17 +63,17 @@ export const WallCoveringsSection: React.FC = () => {
                             <div className="pt-4 md:pt-5">
 
                                 {/* Collection */}
-                                <p className="uppercase text-[#75706A] text-[12px] md:text-[13px] tracking-[0.16em] font-light">
+                                <p className="uppercase text-[#75706A] text-xs tracking-[0.16em] font-light">
                                     {item.collection}
                                 </p>
 
                                 {/* Title */}
-                                <h3 className="mt-5 uppercase text-[#3A3835] text-[18px] md:text-[20px] tracking-[0.10em] font-light leading-[1.2]">
+                                <h3 className="mt-5 uppercase text-[#3A3835] text-base md:text-lg tracking-[0.10em] font-light leading-[1.2]">
                                     {item.title}
                                 </h3>
 
                                 {/* Description */}
-                                <p className="mt-5 max-w-[92%] text-[#706C67] text-[14px] md:text-[15px] leading-[1.65] tracking-[0.03em] font-light">
+                                <p className="mt-5 max-w-[92%] text-[#706C67] text-sm leading-[1.65] tracking-[0.03em] font-light">
                                     {item.description}
                                 </p>
 
@@ -94,17 +94,17 @@ export const WallCoveringsSection: React.FC = () => {
                     <div className="w-full max-w-[560px] text-center">
 
                         {/* Main Heading */}
-                        <h2 className="font-serif text-white text-[34px] md:text-[48px] lg:text-[58px] leading-[1] tracking-[-0.03em]">
+                        <h2 className="font-serif text-white text-2xl md:text-3xl lg:text-4xl leading-tight tracking-[-0.03em]">
                             Sarita Handa Homes
                         </h2>
 
                         {/* Sub Heading */}
-                        <h3 className="mt-5 font-serif text-white text-[24px] md:text-[34px] lg:text-[42px] leading-[1.18] tracking-[-0.025em]">
+                        <h3 className="mt-5 font-serif text-white text-xl md:text-2xl lg:text-3xl leading-snug tracking-[-0.025em]">
                             Love The Way Our Stores Look?
                         </h3>
 
                         {/* Description */}
-                        <p className="mt-10 text-white text-[15px] md:text-[17px] leading-[1.75] font-light max-w-[500px] mx-auto">
+                        <p className="mt-10 text-white text-sm md:text-base leading-[1.75] font-light max-w-[500px] mx-auto">
                             Our expert stylists will assist you in recreating our signature
                             look in your space. Whether you are styling a corner or a
                             complete home, we will work with you to design rooms that are
@@ -115,7 +115,7 @@ export const WallCoveringsSection: React.FC = () => {
                         <div className="mt-12 md:mt-14">
                             <Link
                                 href="/homes"
-                                className="group inline-flex items-center gap-3 uppercase text-white text-[14px] md:text-[15px] tracking-[0.22em] font-light"
+                                className="group inline-flex items-center gap-3 uppercase text-white text-xs md:text-sm tracking-[0.22em] font-light"
                             >
                                 <span>
                                     Know More

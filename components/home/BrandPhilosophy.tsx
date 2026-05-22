@@ -8,10 +8,10 @@ export const BrandPhilosophy: React.FC = () => {
     <section className="w-full bg-[#FAF8F5] py-20 border-t border-[#E6E2D8] px-6">
       <div className="max-w-4xl mx-auto text-center space-y-6">
         <div className="space-y-2">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold block">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#C5A059] font-bold block">
             Atelier Philosophy
           </span>
-          <h2 className="font-serif text-2xl sm:text-4xl text-[#1A1A1A] font-light tracking-wide">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[#1A1A1A] font-light tracking-wide">
             Made-to-Order & Size Inclusive
           </h2>
         </div>
@@ -23,19 +23,19 @@ export const BrandPhilosophy: React.FC = () => {
             <circle cx="50" cy="15" r="3" fill="currentColor" />
           </svg>
         </div>
-        <p className="text-xs sm:text-sm text-[#7A6F62] leading-relaxed max-w-2xl mx-auto font-light tracking-wider">
-          We believe that luxury should fit you flawlessly. Every Keosha garment is handcrafted on a made-to-order basis at our studio in Lucknow. We are proud to offer sizing from XS to 6XL, along with bespoke custom measurements at no additional cost. 
+        <p className="text-sm text-[#7A6F62] leading-relaxed max-w-2xl mx-auto font-light tracking-wider">
+          We believe that luxury should fit you flawlessly. Every Keosha garment is handcrafted on a made-to-order basis at our studio in Lucknow. We are proud to offer sizing from XS to 6XL, along with bespoke custom measurements at no additional cost.
         </p>
         <div className="pt-4 flex flex-wrap justify-center gap-4">
           <Link
             href="/legacy"
-            className="px-6 py-3 border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#FCFAF6] text-[#1A1A1A] text-xs uppercase tracking-widest font-medium transition-colors"
+            className="px-6 py-3 border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#FCFAF6] text-[#1A1A1A] text-xs md:text-sm uppercase tracking-widest font-medium transition-colors"
           >
             Our Artisanal Process
           </Link>
           <Link
             href="/stores"
-            className="px-6 py-3 bg-[#C5A059] hover:bg-[#1A1A1A] text-white text-xs uppercase tracking-widest font-medium transition-colors"
+            className="px-6 py-3 bg-[#C5A059] hover:bg-[#1A1A1A] text-white text-xs md:text-sm uppercase tracking-widest font-medium transition-colors"
           >
             Book Fitting Appointment
           </Link>

@@ -40,8 +40,8 @@ export const SocialGrid: React.FC = () => {
   return (
     <section className="w-full border-t border-[#E6E2D8] py-20 px-6 max-w-7xl mx-auto">
       <div className="text-center space-y-2 mb-12">
-        <span className="text-[10px] uppercase tracking-widest text-[#C5A059] font-bold">Social Atelier</span>
-        <h2 className="font-serif text-2xl sm:text-3xl tracking-wide text-[#1A1A1A]">
+        <span className="text-xs uppercase tracking-widest text-[#C5A059] font-bold">Social Atelier</span>
+        <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl tracking-wide text-[#1A1A1A]">
           <a
             href="https://www.instagram.com/keosha_designs"
             target="_blank"
@@ -51,7 +51,7 @@ export const SocialGrid: React.FC = () => {
             Follow @keosha_designs
           </a>
         </h2>
-        <p className="text-[11px] text-[#7A6F62] tracking-widest uppercase">
+        <p className="text-xs text-[#7A6F62] tracking-widest uppercase">
           Stories from Lucknow studio &bull; Client diaries &bull; Behind the stitch
         </p>
       </div>

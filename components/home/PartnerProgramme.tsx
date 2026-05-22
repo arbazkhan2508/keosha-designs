@@ -31,13 +31,13 @@ export const PartnerProgramme: React.FC = () => {
                     <div className="w-full max-w-[620px] flex flex-col items-center text-center">
 
                         {/* Heading */}
-                        <h2 className="font-serif uppercase text-white text-[34px] sm:text-lg md:text-4xl leading-[0.92] tracking-[-0.04em]">
+                        <h2 className="font-serif uppercase text-white text-2xl md:text-3xl lg:text-4xl leading-tight tracking-[-0.04em]">
                             Partner
-                            Programme
+                            <br className="hidden md:inline" /> Programme
                         </h2>
 
                         {/* Description */}
-                        <p className="mt-7 md:mt-8 max-w-[560px] text-white text-md md:text-base leading-[1.65] font-light">
+                        <p className="mt-7 md:mt-8 max-w-[560px] text-white text-sm md:text-base leading-[1.65] font-light">
                             Be the first to access new collections and
                             enjoy exclusive privileges, designed for
                             our trusted collaborators.
@@ -47,7 +47,7 @@ export const PartnerProgramme: React.FC = () => {
                         <div className="mt-16 md:mt-20">
                             <Link
                                 href="/partner-programme"
-                                className="group inline-flex items-center gap-3 uppercase text-white text-[13px] md:text-[15px] tracking-[0.22em] font-light"
+                                className="group inline-flex items-center gap-3 uppercase text-white text-xs md:text-sm tracking-[0.22em] font-light"
                             >
                                 <span>
                                     Know More

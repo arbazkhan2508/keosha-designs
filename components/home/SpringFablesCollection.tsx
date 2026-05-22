@@ -61,7 +61,7 @@ export const SpringFablesCollection: React.FC = () => {
 
                     {/* Heading */}
                     <div>
-                        <h2 className="font-serif text-sm md:text-4xl tracking-[-0.045em] text-[#1C1C1A]">
+                        <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl tracking-[-0.045em] text-[#1C1C1A] leading-tight">
                             Spring Fables
                             <br />
                             Collection
@@ -92,7 +92,7 @@ export const SpringFablesCollection: React.FC = () => {
                         </button>
 
                         {/* Pagination */}
-                        <div className="text-[16px] tracking-[0.08em] text-[#2D2D2B] font-light min-w-[56px] text-center">
+                        <div className="text-sm md:text-base tracking-[0.08em] text-[#2D2D2B] font-light min-w-[56px] text-center">
                             {activeSlide} / {slides.length}
                         </div>
 
@@ -163,7 +163,7 @@ export const SpringFablesCollection: React.FC = () => {
                                             </div>
 
                                             {/* Title */}
-                                            <h3 className="mt-4 text-[14px] md:text-[16px] uppercase tracking-[0.12em] text-[#4A4A46] font-light leading-[1.2]">
+                                            <h3 className="mt-4 text-xs md:text-sm uppercase tracking-[0.12em] text-[#4A4A46] font-light leading-[1.2]">
                                                 {item.title}
                                             </h3>
 
