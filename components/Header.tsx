@@ -98,6 +98,7 @@ export const Header: React.FC = () => {
 
       {/* Main Sticky/Overlay Header */}
       <header
+        onMouseLeave={() => setActiveMegaMenu(null)}
         className={`w-full z-45 transition-all duration-500 ease-in-out ${isHome
           ? (isScrolled
             ? "fixed top-0 inset-x-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
@@ -115,7 +116,6 @@ export const Header: React.FC = () => {
             <div
               className="relative py-2 cursor-pointer"
               onMouseEnter={() => setActiveMegaMenu("new_in")}
-              onMouseLeave={() => setActiveMegaMenu(null)}
             >
               <Link
                 href="/shop"
@@ -132,7 +132,6 @@ export const Header: React.FC = () => {
             <div
               className="relative py-2 cursor-pointer"
               onMouseEnter={() => setActiveMegaMenu("shop")}
-              onMouseLeave={() => setActiveMegaMenu(null)}
             >
               <span
                 className={`transition-colors flex items-center gap-1 py-2 relative block ${activeMegaMenu === "shop" ? "text-[#C5A059]" : ""}`}
@@ -150,6 +149,7 @@ export const Header: React.FC = () => {
             {/* SEARCH Trigger */}
             <button
               onClick={() => setSearchActive(true)}
+              onMouseEnter={() => setActiveMegaMenu(null)}
               className="luxury-link inline-block transition-colors py-2 cursor-pointer uppercase hover:text-[#C5A059]"
             >
               SEARCH
@@ -171,7 +171,10 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Central Logo - Always Monogram (Image 1, 2, 4) */}
-          <div className="lg:static absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 text-center flex items-center justify-center z-10">
+          <div 
+            onMouseEnter={() => setActiveMegaMenu(null)}
+            className="lg:static absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 text-center flex items-center justify-center z-10"
+          >
             <Link href="/" className="inline-block group">
               <div className="flex items-center justify-center h-10 w-16 transition-all duration-500">
                 <MonogramLogo className={`h-7 w-auto transition-colors duration-500 ${isDarkHeader ? "text-white group-hover:text-[#C5A059]" : "text-[#1A1A1A] group-hover:text-[#C5A059]"}`} />
@@ -195,7 +198,10 @@ export const Header: React.FC = () => {
             {/* Our Stores Dropdown Wrapper (Image 4) */}
             <div
               className="relative py-2 cursor-pointer hidden lg:block"
-              onMouseEnter={() => setIsStoresOpen(true)}
+              onMouseEnter={() => {
+                setIsStoresOpen(true);
+                setActiveMegaMenu(null);
+              }}
               onMouseLeave={() => setIsStoresOpen(false)}
             >
               <Link
@@ -250,6 +256,7 @@ export const Header: React.FC = () => {
             {/* Account (Desktop only) */}
             <Link
               href="/stores"
+              onMouseEnter={() => setActiveMegaMenu(null)}
               className="hidden lg:block luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
               title="My Account"
             >
@@ -259,6 +266,7 @@ export const Header: React.FC = () => {
             {/* Cart Trigger (Desktop only) */}
             <button
               onClick={() => setCartOpen(true)}
+              onMouseEnter={() => setActiveMegaMenu(null)}
               className="hidden lg:block luxury-link inline-block transition-colors py-2 cursor-pointer hover:text-[#C5A059]"
             >
               CART ({cartCount})

@@ -44,17 +44,37 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
         )}
 
+        {/* Status Badge */}
+        <div className={`absolute top-3 left-3 px-2 py-0.5 text-[9px] uppercase tracking-widest font-semibold border ${
+          product.status === "sold-out" 
+            ? "bg-[#FADBD8] border-[#FDEDEC] text-[#922B21]" 
+            : "bg-[#FCFAF6] border-[#E6E2D8] text-[#1A1A1A]"
+        }`}>
+          {product.status === "sold-out" ? "SOLD OUT" : "READY TO SHIP"}
+        </div>
+
         {/* Collection Tag */}
-        <div className="absolute top-3 left-3 bg-white/80 backdrop-blur-xs px-2 py-0.5 border border-[#E6E2D8] text-[9px] uppercase tracking-widest font-semibold text-[#7A6F62]">
+        <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-xs px-2 py-0.5 border border-[#E6E2D8] text-[9px] uppercase tracking-widest font-semibold text-[#7A6F62]">
           {product.collection}
         </div>
 
+        {/* Out of Stock Overlay */}
+        {product.status === "sold-out" && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center z-10 transition-opacity duration-300">
+            <span className="text-white text-xs uppercase tracking-[0.25em] font-semibold border border-white/40 px-5 py-2 bg-black/30 shadow-md">
+              OUT OF STOCK
+            </span>
+          </div>
+        )}
+
         {/* Hover Slider Button */}
-        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-linear-to-t from-black/50 to-transparent flex justify-center">
-          <span className="w-full bg-[#FCFAF6] text-[#1A1A1A] py-2.5 text-center text-xs uppercase tracking-widest font-semibold border border-[#E6E2D8] transition-colors hover:bg-[#1A1A1A] hover:text-[#FCFAF6]">
-            Atelier Customise
-          </span>
-        </div>
+        {product.status !== "sold-out" && (
+          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-linear-to-t from-black/50 to-transparent flex justify-center z-10">
+            <span className="w-full bg-[#FCFAF6] text-[#1A1A1A] py-2.5 text-center text-xs uppercase tracking-widest font-semibold border border-[#E6E2D8] transition-colors hover:bg-[#1A1A1A] hover:text-[#FCFAF6]">
+              Atelier Customise
+            </span>
+          </div>
+        )}
       </Link>
 
       {/* Description Info */}
