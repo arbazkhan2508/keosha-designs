@@ -6,6 +6,54 @@ import { usePathname } from "next/navigation";
 import { useCart } from "../context/CartContext";
 import { MegaMenu } from "./MegaMenu";
 
+const MonogramLogo: React.FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 54 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Backward K */}
+      <path
+        d="M14 4V24"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="square"
+      />
+      <path
+        d="M3 4L14 14"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="square"
+      />
+      <path
+        d="M3 24L14 14"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="square"
+      />
+
+      {/* Apostrophe */}
+      <path
+        d="M23 4C23 6.5 22 8 20.5 9"
+        stroke="currentColor"
+        strokeWidth="2.0"
+        strokeLinecap="round"
+      />
+
+      {/* U/H-like shape */}
+      <path
+        d="M30 4V24H47V4"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+      />
+    </svg>
+  );
+};
+
 export const Header: React.FC = () => {
   const { cartCount, setCartOpen } = useCart();
   const pathname = usePathname();
@@ -17,6 +65,7 @@ export const Header: React.FC = () => {
 
   const isHome = pathname === "/";
   const isTransparent = isHome && !isScrolled;
+  const isDarkHeader = isHome || isScrolled;
 
   // Handle scroll effect
   useEffect(() => {
@@ -42,21 +91,21 @@ export const Header: React.FC = () => {
 
       {/* Main Sticky/Overlay Header */}
       <header
-        className={`w-full z-40 transition-all duration-500 ease-in-out  ${isHome
+        className={`w-full z-40 transition-all duration-500 ease-in-out ${isHome
           ? (isScrolled
-            ? "fixed top-0 left-0 bg-[#FCFAF6]/90 backdrop-blur-md shadow-xs py-3 border-b border-[#E6E2D8] text-[#1A1A1A]"
+            ? "fixed top-0 left-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
             : "absolute top-0 left-0 bg-transparent py-6 text-white")
           : (isScrolled
-            ? "fixed top-0 left-0 bg-[#FCFAF6]/90 backdrop-blur-md shadow-xs py-3 border-b border-[#E6E2D8] text-[#1A1A1A]"
-            : "sticky top-0 bg-[#FCFAF6] border-b border-[#E6E2D8] py-4 text-[#1A1A1A]")
+            ? "fixed top-0 left-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
+            : "sticky top-0 bg-[#FCFAF6] border-b border-[#E6E2D8]/50 py-4 text-[#1A1A1A]")
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between font-sans">
+        <div className={`max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between font-sans transition-colors duration-500 ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
 
           {/* Left Menu Items (Desktop) */}
-          <nav className={`hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold ${isTransparent ? "text-white" : "text-[#1A1A1A]"}`}>
-            <Link href="/shop" className={`luxury-link inline-block transition-colors py-2 ${isTransparent ? "hover:text-[#C5A059] text-white" : "hover:text-[#C5A059] text-[#1A1A1A]"}`}>
-              New In
+          <nav className={`hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold transition-colors duration-500 ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
+            <Link href="/shop" className="luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]">
+              NEW IN
             </Link>
             <div
               className="relative py-2 cursor-pointer"
@@ -64,8 +113,8 @@ export const Header: React.FC = () => {
               onMouseLeave={() => setIsMegaMenuOpen(false)}
             >
               <span className="hover:text-[#C5A059] transition-colors flex items-center gap-1">
-                Shop
-                <svg className={`w-3 h-3 transition-colors ${isTransparent ? "text-white/80" : "text-[#7A6F62]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                SHOP
+                <svg className={`w-3 h-3 transition-colors ${isDarkHeader ? "text-white/80" : "text-[#1A1A1A]/80"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </span>
@@ -75,17 +124,16 @@ export const Header: React.FC = () => {
             </div>
             <button
               onClick={() => setSearchActive(!searchActive)}
-              className={`luxury-link inline-block transition-colors py-2 cursor-pointer uppercase ${isTransparent ? "hover:text-[#C5A059] text-white" : "hover:text-[#C5A059] text-[#1A1A1A]"
-                }`}
+              className="luxury-link inline-block transition-colors py-2 cursor-pointer uppercase hover:text-[#C5A059]"
             >
-              Search
+              SEARCH
             </button>
           </nav>
 
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden transition-colors ${isTransparent ? "text-white hover:text-[#C5A059]" : "text-[#1A1A1A] hover:text-[#C5A059]"}`}
+            className={`md:hidden transition-colors hover:text-[#C5A059] ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {isMobileMenuOpen ? (
@@ -97,23 +145,31 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Central Logo */}
-          <div className="text-center">
+          <div className="text-center flex items-center justify-center">
             <Link href="/" className="inline-block group">
-              <h1 className={`font-serif text-2xl lg:text-3xl tracking-[0.25em] font-light transition-colors duration-500 ${isTransparent ? "text-white group-hover:text-[#C5A059]" : "text-[#1A1A1A] group-hover:text-[#C5A059]"}`}>
-                KEOSHA
-              </h1>
-              <span className={`block text-[7px] uppercase tracking-[0.45em] transition-colors duration-500 -mt-1 font-semibold ${isTransparent ? "text-white/60" : "text-[#7A6F62]"}`}>
-                designs
-              </span>
+              {isScrolled ? (
+                <div className="flex items-center justify-center h-8 w-14 transition-all duration-500">
+                  <MonogramLogo className={`h-6 w-auto transition-colors duration-500 ${isDarkHeader ? "text-white group-hover:text-[#C5A059]" : "text-[#1A1A1A] group-hover:text-[#C5A059]"}`} />
+                </div>
+              ) : (
+                <div className="transition-all duration-500">
+                  <h1 className={`font-serif text-2xl lg:text-3xl tracking-[0.25em] font-light transition-colors duration-500 group-hover:text-[#C5A059] ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
+                    KEOSHA
+                  </h1>
+                  <span className={`block text-[7px] uppercase tracking-[0.45em] transition-colors duration-500 -mt-1 font-semibold group-hover:text-[#C5A059] ${isDarkHeader ? "text-white/70" : "text-[#1A1A1A]/70"}`}>
+                    DESIGNS
+                  </span>
+                </div>
+              )}
             </Link>
           </div>
 
           {/* Right Header Items (Search for mobile, Stores, Account, Cart for desktop) */}
-          <div className="flex items-center space-x-6 text-xs uppercase tracking-widest font-semibold">
+          <div className={`flex items-center space-x-6 text-xs uppercase tracking-widest font-semibold transition-colors duration-500 ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
             {/* Search (Mobile only) */}
             <button
               onClick={() => setSearchActive(!searchActive)}
-              className={`md:hidden transition-colors flex items-center p-1 ${isTransparent ? "text-white hover:text-[#C5A059]" : "text-[#1A1A1A] hover:text-[#C5A059]"}`}
+              className="md:hidden transition-colors flex items-center p-1 hover:text-[#C5A059]"
               title="Search Collection"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,39 +180,36 @@ export const Header: React.FC = () => {
             {/* Our Stores (Desktop only) */}
             <Link
               href="/stores"
-              className={`hidden md:block luxury-link inline-block transition-colors py-2 ${isTransparent ? "text-white hover:text-[#C5A059]" : "text-[#1A1A1A] hover:text-[#C5A059]"
-                }`}
+              className="hidden md:block luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
             >
-              Our Stores
+              OUR STORES
             </Link>
 
             {/* Account (Desktop only) */}
             <Link
               href="/stores"
-              className={`hidden md:block luxury-link inline-block transition-colors py-2 ${isTransparent ? "text-white hover:text-[#C5A059]" : "text-[#1A1A1A] hover:text-[#C5A059]"
-                }`}
+              className="hidden md:block luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
               title="My Account"
             >
-              Account
+              ACCOUNT
             </Link>
 
             {/* Cart Trigger (Desktop only, matches "CART (0)" text layout) */}
             <button
               onClick={() => setCartOpen(true)}
-              className={`hidden md:block luxury-link inline-block transition-colors py-2 cursor-pointer ${isTransparent ? "text-white hover:text-[#C5A059]" : "text-[#1A1A1A] hover:text-[#C5A059]"
-                }`}
+              className="hidden md:block luxury-link inline-block transition-colors py-2 cursor-pointer hover:text-[#C5A059]"
             >
-              Cart ({cartCount})
+              CART ({cartCount})
             </button>
 
             {/* Mobile Cart Trigger with badge */}
             <button
               onClick={() => setCartOpen(true)}
-              className={`md:hidden transition-colors flex items-center gap-1.5 p-1 relative ${isTransparent ? "text-white hover:text-[#C5A059]" : "text-[#1A1A1A] hover:text-[#C5A059]"
-                }`}
+              className="md:hidden transition-colors flex items-center gap-1.5 p-1 relative hover:text-[#C5A059]"
               title="Shopping Cart"
             >
-              <span className={`text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold font-sans transition-colors ${isTransparent ? "bg-white text-[#1A1A1A]" : "bg-[#1A1A1A] text-[#FCFAF6]"}`}>
+              <span className={`text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold font-sans transition-colors ${isDarkHeader ? "bg-white text-[#1A1A1A]" : "bg-[#1A1A1A] text-[#FCFAF6]"
+                }`}>
                 {cartCount}
               </span>
             </button>
