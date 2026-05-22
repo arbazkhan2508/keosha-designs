@@ -81,6 +81,15 @@ body {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @keyframes scrollLine {
   0% {
     transform: translateY(-100%);
@@ -98,7 +107,11 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: fadeIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .animate-scroll-line {

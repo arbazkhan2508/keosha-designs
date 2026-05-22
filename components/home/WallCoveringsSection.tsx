@@ -141,7 +141,7 @@ export const WallCoveringsSection: React.FC = () => {
                 </div>
 
                 {/* Right Image */}
-                <div className="relative w-full min-h-[520px] md:min-h-[760px] overflow-hidden">
+                <div className="relative w-full min-h-[350px] sm:min-h-[450px] md:min-h-[760px] overflow-hidden">
 
                     <Image
                         src={homesBanner}

@@ -140,18 +140,18 @@ export const Footer: React.FC = () => {
 
             {/* Right Column: Accordions & Payment Gateways */}
             <div className="flex flex-col space-y-16 lg:space-y-28 justify-between">
-              {/* Accordions */}
-              <div className="flex flex-col space-y-6">
+              {/* Accordions / Links Columns */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
 
                 {/* Accordion 1: LEGAL AND POLICY */}
-                <div className="border-b border-[#2D2D2B]/15 pb-5">
+                <div className="border-b border-[#2D2D2B]/15 pb-5 lg:border-none lg:pb-0">
                   <button
                     onClick={() => setIsOpenLegal(!isOpenLegal)}
-                    className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none"
+                    className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none lg:pointer-events-none lg:cursor-default lg:hover:text-[#2D2D2B] lg:py-0 lg:pb-4"
                   >
                     <span>LEGAL AND POLICY</span>
                     <svg
-                      className={`w-3.5 h-3.5 transform transition-transform duration-300 ${isOpenLegal ? "rotate-180" : ""
+                      className={`w-3.5 h-3.5 lg:hidden transform transition-transform duration-300 ${isOpenLegal ? "rotate-180" : ""
                         }`}
                       fill="none"
                       stroke="currentColor"
@@ -162,7 +162,7 @@ export const Footer: React.FC = () => {
                     </svg>
                   </button>
                   <div
-                    className={`transition-all duration-300 ease-in-out ${isOpenLegal ? "max-h-40 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    className={`transition-all duration-300 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible ${isOpenLegal ? "max-h-40 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
                       }`}
                   >
                     <ul className="flex flex-col space-y-3.5 text-[10px] md:text-[11px] tracking-[0.2em] uppercase opacity-80 pl-1 pb-2">
@@ -186,14 +186,14 @@ export const Footer: React.FC = () => {
                 </div>
 
                 {/* Accordion 2: COMPANY */}
-                <div className="border-b border-[#2D2D2B]/15 pb-5">
+                <div className="border-b border-[#2D2D2B]/15 pb-5 lg:border-none lg:pb-0">
                   <button
                     onClick={() => setIsOpenCompany(!isOpenCompany)}
-                    className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none"
+                    className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none lg:pointer-events-none lg:cursor-default lg:hover:text-[#2D2D2B] lg:py-0 lg:pb-4"
                   >
                     <span>COMPANY</span>
                     <svg
-                      className={`w-3.5 h-3.5 transform transition-transform duration-300 ${isOpenCompany ? "rotate-180" : ""
+                      className={`w-3.5 h-3.5 lg:hidden transform transition-transform duration-300 ${isOpenCompany ? "rotate-180" : ""
                         }`}
                       fill="none"
                       stroke="currentColor"
@@ -204,7 +204,7 @@ export const Footer: React.FC = () => {
                     </svg>
                   </button>
                   <div
-                    className={`transition-all duration-300 ease-in-out ${isOpenCompany ? "max-h-56 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    className={`transition-all duration-300 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible ${isOpenCompany ? "max-h-56 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
                       }`}
                   >
                     <ul className="flex flex-col space-y-3.5 text-[10px] md:text-[11px] tracking-[0.2em] uppercase opacity-80 pl-1 pb-2">

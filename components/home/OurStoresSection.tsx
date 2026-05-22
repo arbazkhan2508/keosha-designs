@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
+import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 
@@ -81,12 +82,11 @@ export const OurStoresSection: React.FC = () => {
             </div>
 
             {/* Navigation Controls */}
-            <div className="flex items-center gap-10 mt-12 lg:mt-0 pb-2">
+            <div className="flex items-center gap-10 mt-12 lg:mt-0 pb-2 relative z-10">
               
               {/* Prev Button */}
               <button
-                onClick={() => swiperRef.current?.slidePrev()}
-                className="group p-1"
+                className="stores-prev group relative z-10 cursor-pointer p-2 flex items-center justify-center pointer-events-auto"
                 aria-label="Previous slide"
               >
                 <svg
@@ -105,14 +105,13 @@ export const OurStoresSection: React.FC = () => {
               </button>
 
               {/* Slide Counter */}
-              <div className="text-sm md:text-base tracking-[0.08em] text-[#2D2D2B] font-light min-w-[56px] text-center">
+              <div className="text-sm md:text-base tracking-[0.08em] text-[#2D2D2B] font-light min-w-[56px] text-center select-none">
                 {activeSlide} / {stores.length}
               </div>
 
               {/* Next Button */}
               <button
-                onClick={() => swiperRef.current?.slideNext()}
-                className="group p-1"
+                className="stores-next group relative z-10 cursor-pointer p-2 flex items-center justify-center pointer-events-auto"
                 aria-label="Next slide"
               >
                 <svg
@@ -136,6 +135,11 @@ export const OurStoresSection: React.FC = () => {
           {/* Right Column - Swiper Slider */}
           <div className="min-w-0">
             <Swiper
+              modules={[Navigation]}
+              navigation={{
+                prevEl: ".stores-prev",
+                nextEl: ".stores-next",
+              }}
               loop
               speed={1000}
               slidesPerView={1}

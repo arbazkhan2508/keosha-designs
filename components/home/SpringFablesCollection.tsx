@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
+import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 
@@ -20,31 +21,27 @@ type ProductCard = {
     href: string;
 };
 
-const slides: ProductCard[][] = [
-    [
-        {
-            title: "CUSHIONS GARDEN SPREY BLUE",
-            image: collectionImg1,
-            href: "/shop/cushions-garden-sprey-blue",
-        },
-        {
-            title: "CUSHIONS GARDEN BUG NATURAL",
-            image: collectionImg2,
-            href: "/shop/cushions-garden-bug-natural",
-        },
-    ],
-    [
-        {
-            title: "CUSHIONS CANOPY BLUE",
-            image: collectionImg3,
-            href: "/shop/cushions-canopy-blue",
-        },
-        {
-            title: "CUSHIONS GARDEN BUG BLUE",
-            image: collectionImg4,
-            href: "/shop/cushions-garden-bug-blue",
-        },
-    ],
+const products: ProductCard[] = [
+    {
+        title: "CUSHIONS GARDEN SPREY BLUE",
+        image: collectionImg1,
+        href: "/shop/cushions-garden-sprey-blue",
+    },
+    {
+        title: "CUSHIONS GARDEN BUG NATURAL",
+        image: collectionImg2,
+        href: "/shop/cushions-garden-bug-natural",
+    },
+    {
+        title: "CUSHIONS CANOPY BLUE",
+        image: collectionImg3,
+        href: "/shop/cushions-canopy-blue",
+    },
+    {
+        title: "CUSHIONS GARDEN BUG BLUE",
+        image: collectionImg4,
+        href: "/shop/cushions-garden-bug-blue",
+    },
 ];
 
 export const SpringFablesCollection: React.FC = () => {
@@ -70,12 +67,12 @@ export const SpringFablesCollection: React.FC = () => {
                     </div>
 
                     {/* Navigation */}
-                    <div className="flex items-center gap-10 mt-10 lg:mt-0 pb-2">
+                    <div className="flex items-center gap-10 mt-10 lg:mt-0 pb-2 relative z-10">
 
                         {/* Prev */}
                         <button
-                            onClick={() => swiperRef.current?.slidePrev()}
-                            className="group"
+                            className="spring-prev group relative z-10 cursor-pointer p-2 flex items-center justify-center pointer-events-auto"
+                            aria-label="Previous slide"
                         >
                             <svg
                                 className="w-8 h-8 text-[#2D2D2B] transition-transform duration-300 group-hover:-translate-x-1"
@@ -93,14 +90,14 @@ export const SpringFablesCollection: React.FC = () => {
                         </button>
 
                         {/* Pagination */}
-                        <div className="text-sm md:text-base tracking-[0.08em] text-[#2D2D2B] font-light min-w-[56px] text-center">
-                            {activeSlide} / {slides.length}
+                        <div className="text-sm md:text-base tracking-[0.08em] text-[#2D2D2B] font-light min-w-[56px] text-center select-none">
+                            {activeSlide} / {products.length}
                         </div>
 
                         {/* Next */}
                         <button
-                            onClick={() => swiperRef.current?.slideNext()}
-                            className="group"
+                            className="spring-next group relative z-10 cursor-pointer p-2 flex items-center justify-center pointer-events-auto"
+                            aria-label="Next slide"
                         >
                             <svg
                                 className="w-8 h-8 text-[#2D2D2B] transition-transform duration-300 group-hover:translate-x-1"
@@ -124,10 +121,21 @@ export const SpringFablesCollection: React.FC = () => {
                 <div className="min-w-0">
 
                     <Swiper
+                        modules={[Navigation]}
+                        navigation={{
+                            prevEl: ".spring-prev",
+                            nextEl: ".spring-next",
+                        }}
                         loop
                         speed={1000}
                         slidesPerView={1}
-                        spaceBetween={0}
+                        spaceBetween={20}
+                        breakpoints={{
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 24,
+                            },
+                        }}
                         allowTouchMove
                         onSwiper={(swiper) => {
                             swiperRef.current = swiper;
@@ -137,42 +145,29 @@ export const SpringFablesCollection: React.FC = () => {
                         }}
                         className="w-full"
                     >
-                        {slides.map((slide, slideIndex) => (
-                            <SwiperSlide key={slideIndex}>
+                        {products.map((item, index) => (
+                            <SwiperSlide key={index}>
+                                <Link
+                                    href={item.href}
+                                    className="group block"
+                                >
+                                    {/* Image */}
+                                    <div className="relative w-full h-[400px] sm:h-[480px] md:h-[620px] overflow-hidden bg-[#ECE7DF]">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.title}
+                                            fill
+                                            priority
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                                        />
+                                    </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                                    {slide.map((item, index) => (
-                                        <Link
-                                            key={index}
-                                            href={item.href}
-                                            className="group block"
-                                        >
-
-                                            {/* Image */}
-                                            <div className="relative w-full h-[480px] md:h-[620px] overflow-hidden bg-[#ECE7DF]">
-
-                                                <Image
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                    fill
-                                                    priority
-                                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                                                />
-
-                                            </div>
-
-                                            {/* Title */}
-                                            <h3 className="mt-4 text-xs md:text-sm uppercase tracking-[0.12em] text-[#4A4A46] font-light leading-[1.2]">
-                                                {item.title}
-                                            </h3>
-
-                                        </Link>
-                                    ))}
-
-                                </div>
-
+                                    {/* Title */}
+                                    <h3 className="mt-4 text-xs md:text-sm uppercase tracking-[0.12em] text-[#4A4A46] font-light leading-[1.2]">
+                                        {item.title}
+                                    </h3>
+                                </Link>
                             </SwiperSlide>
                         ))}
                     </Swiper>

@@ -26,7 +26,7 @@ export const PartnerProgramme: React.FC = () => {
                 </div>
 
                 {/* Right Content */}
-                <div className="bg-[#1D2C3A] flex items-center justify-center px-6 md:px-10 lg:px-14">
+                <div className="bg-[#1D2C3A] flex items-center justify-center px-6 md:px-10 lg:px-14 py-16 md:py-0">
 
                     <div className="w-full max-w-[620px] flex flex-col items-center text-center">
 
