@@ -57,14 +57,14 @@ const MonogramLogo: React.FC<{ className?: string }> = ({ className }) => {
 export const Header: React.FC = () => {
   const { cartCount, setCartOpen } = useCart();
   const pathname = usePathname();
-  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<"new_in" | "shop" | null>(null);
+  const [isStoresOpen, setIsStoresOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const isHome = pathname === "/";
-  const isTransparent = isHome && !isScrolled;
   const isDarkHeader = isHome || isScrolled;
 
   // Handle scroll effect
@@ -80,6 +80,13 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSearchSubmit = () => {
+    if (searchQuery.trim() !== "") {
+      window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
+      setSearchActive(false);
+    }
+  };
+
   return (
     <>
       {/* Announcement Bar - Hidden on Home page to match reference */}
@@ -91,7 +98,7 @@ export const Header: React.FC = () => {
 
       {/* Main Sticky/Overlay Header */}
       <header
-        className={`w-full z-40 transition-all duration-500 ease-in-out ${isHome
+        className={`w-full z-45 transition-all duration-500 ease-in-out ${isHome
           ? (isScrolled
             ? "fixed top-0 inset-x-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
             : "absolute top-0 inset-x-0 bg-transparent py-6 text-white")
@@ -104,26 +111,45 @@ export const Header: React.FC = () => {
 
           {/* Left Menu Items (Desktop) */}
           <nav className={`hidden lg:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold transition-colors duration-500 ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
-            <Link href="/shop" className="luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]">
-              NEW IN
-            </Link>
+            {/* NEW IN Dropdown Hover Trigger */}
             <div
               className="relative py-2 cursor-pointer"
-              onMouseEnter={() => setIsMegaMenuOpen(true)}
-              onMouseLeave={() => setIsMegaMenuOpen(false)}
+              onMouseEnter={() => setActiveMegaMenu("new_in")}
+              onMouseLeave={() => setActiveMegaMenu(null)}
             >
-              <span className="hover:text-[#C5A059] transition-colors flex items-center gap-1">
+              <Link
+                href="/shop"
+                className={`transition-colors py-2 relative block ${activeMegaMenu === "new_in" ? "text-[#C5A059]" : ""}`}
+              >
+                NEW IN
+                {activeMegaMenu === "new_in" && (
+                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#C5A059]" />
+                )}
+              </Link>
+            </div>
+
+            {/* SHOP Dropdown Hover Trigger */}
+            <div
+              className="relative py-2 cursor-pointer"
+              onMouseEnter={() => setActiveMegaMenu("shop")}
+              onMouseLeave={() => setActiveMegaMenu(null)}
+            >
+              <span
+                className={`transition-colors flex items-center gap-1 py-2 relative block ${activeMegaMenu === "shop" ? "text-[#C5A059]" : ""}`}
+              >
                 SHOP
                 <svg className={`w-3 h-3 transition-colors ${isDarkHeader ? "text-white/80" : "text-[#1A1A1A]/80"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
+                {activeMegaMenu === "shop" && (
+                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#C5A059]" />
+                )}
               </span>
-
-              {/* Mega Menu Portal */}
-              {isMegaMenuOpen && <MegaMenu onLinkClick={() => setIsMegaMenuOpen(false)} />}
             </div>
+
+            {/* SEARCH Trigger */}
             <button
-              onClick={() => setSearchActive(!searchActive)}
+              onClick={() => setSearchActive(true)}
               className="luxury-link inline-block transition-colors py-2 cursor-pointer uppercase hover:text-[#C5A059]"
             >
               SEARCH
@@ -144,31 +170,20 @@ export const Header: React.FC = () => {
             </svg>
           </button>
 
-          {/* Central Logo */}
+          {/* Central Logo - Always Monogram (Image 1, 2, 4) */}
           <div className="lg:static absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 text-center flex items-center justify-center z-10">
             <Link href="/" className="inline-block group">
-              {isScrolled ? (
-                <div className="flex items-center justify-center h-8 w-14 transition-all duration-500">
-                  <MonogramLogo className={`h-6 w-auto transition-colors duration-500 ${isDarkHeader ? "text-white group-hover:text-[#C5A059]" : "text-[#1A1A1A] group-hover:text-[#C5A059]"}`} />
-                </div>
-              ) : (
-                <div className="transition-all duration-500">
-                  <h1 className={`font-serif text-xl sm:text-2xl lg:text-3xl tracking-[0.2em] sm:tracking-[0.25em] font-light transition-colors duration-500 group-hover:text-[#C5A059] ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
-                    KEOSHA
-                  </h1>
-                  <span className={`block text-[6px] sm:text-[7px] uppercase tracking-[0.4em] sm:tracking-[0.45em] transition-colors duration-500 -mt-1 font-semibold group-hover:text-[#C5A059] ${isDarkHeader ? "text-white/70" : "text-[#1A1A1A]/70"}`}>
-                    DESIGNS
-                  </span>
-                </div>
-              )}
+              <div className="flex items-center justify-center h-10 w-16 transition-all duration-500">
+                <MonogramLogo className={`h-7 w-auto transition-colors duration-500 ${isDarkHeader ? "text-white group-hover:text-[#C5A059]" : "text-[#1A1A1A] group-hover:text-[#C5A059]"}`} />
+              </div>
             </Link>
           </div>
 
-          {/* Right Header Items (Search for mobile, Stores, Account, Cart for desktop) */}
+          {/* Right Header Items */}
           <div className={`flex items-center space-x-6 text-xs uppercase tracking-widest font-semibold transition-colors duration-500 ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
             {/* Search (Mobile only) */}
             <button
-              onClick={() => setSearchActive(!searchActive)}
+              onClick={() => setSearchActive(true)}
               className="lg:hidden transition-colors flex items-center p-1 hover:text-[#C5A059]"
               title="Search Collection"
             >
@@ -177,13 +192,60 @@ export const Header: React.FC = () => {
               </svg>
             </button>
 
-            {/* Our Stores (Desktop only) */}
-            <Link
-              href="/stores"
-              className="hidden lg:block luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
+            {/* Our Stores Dropdown Wrapper (Image 4) */}
+            <div
+              className="relative py-2 cursor-pointer hidden lg:block"
+              onMouseEnter={() => setIsStoresOpen(true)}
+              onMouseLeave={() => setIsStoresOpen(false)}
             >
-              OUR STORES
-            </Link>
+              <Link
+                href="/stores"
+                className="luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
+              >
+                OUR STORES
+              </Link>
+              {isStoresOpen && (
+                <div className="absolute top-full right-0 lg:left-0 min-w-[320px] bg-white border border-[#E6E2D8] shadow-lg py-4 z-50 text-left font-sans animate-fade-in text-[#1A1A1A]">
+                  <ul className="flex flex-col text-[10px] font-bold tracking-[0.18em]">
+                    <li>
+                      <Link href="/stores#delhi-flagship" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors border-b border-[#E6E2D8]/30 leading-relaxed">
+                        DELHI (FLAGSHIP STORE, SULTANPUR)
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/stores#sarita-handa-now" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors border-b border-[#E6E2D8]/30 leading-relaxed">
+                        SARITA HANDA NOW, DELHI (SULTANPUR)
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/stores#delhi-defence-colony" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors border-b border-[#E6E2D8]/30 leading-relaxed">
+                        DELHI (DEFENCE COLONY)
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/stores#mumbai-bandra" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors border-b border-[#E6E2D8]/30 leading-relaxed">
+                        MUMBAI (BANDRA)
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/stores#mumbai-mahalaxmi" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors border-b border-[#E6E2D8]/30 leading-relaxed">
+                        MUMBAI (MAHALAXMI)
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/stores#hyderabad" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors border-b border-[#E6E2D8]/30 leading-relaxed">
+                        HYDERABAD
+                      </Link>
+                    </li>
+                    <li>
+                      <a href="https://wa.me/919528640429" target="_blank" rel="noopener noreferrer" className="block px-6 py-3 hover:bg-[#FAF8F5] hover:text-[#C5A059] transition-colors leading-relaxed">
+                        CUSTOMER CARE
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
 
             {/* Account (Desktop only) */}
             <Link
@@ -194,7 +256,7 @@ export const Header: React.FC = () => {
               ACCOUNT
             </Link>
 
-            {/* Cart Trigger (Desktop only, matches "CART (0)" text layout) */}
+            {/* Cart Trigger (Desktop only) */}
             <button
               onClick={() => setCartOpen(true)}
               className="hidden lg:block luxury-link inline-block transition-colors py-2 cursor-pointer hover:text-[#C5A059]"
@@ -215,42 +277,59 @@ export const Header: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {/* Mega Menus (Full-screen width relative to header) */}
+        {activeMegaMenu && (
+          <div
+            className="w-full"
+            onMouseEnter={() => setActiveMegaMenu(activeMegaMenu)}
+            onMouseLeave={() => setActiveMegaMenu(null)}
+          >
+            <MegaMenu menuType={activeMegaMenu} onLinkClick={() => setActiveMegaMenu(null)} />
+          </div>
+        )}
       </header>
 
-      {/* Search Dropdown Overlay */}
+      {/* Fullscreen Search Overlay (Image 3) */}
       {searchActive && (
-        <div className="w-full bg-[#FAF8F5] border-b border-[#E6E2D8] py-8 px-6 transition-all duration-300 font-sans shadow-md z-30 relative">
-          <div className="max-w-2xl mx-auto flex items-center justify-between">
-            <div className="flex-1 flex items-center space-x-3">
-              <svg className="w-5 h-5 text-[#7A6F62]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search catalog for sarees, kurtas, collections..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent border-b border-[#E6E2D8] py-2 text-sm text-[#1A1A1A] focus:border-[#C5A059] outline-none transition-colors"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && searchQuery.trim() !== "") {
-                    window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
-                  }
-                }}
-              />
-            </div>
+        <div className="fixed inset-0 z-50 bg-[#FCFAF6]/98 backdrop-blur-md flex flex-col justify-center items-center px-6 transition-all duration-300 font-sans shadow-2xl animate-fade-in text-[#1A1A1A]">
+          {/* Close button in top right */}
+          <button
+            onClick={() => setSearchActive(false)}
+            className="absolute top-8 right-8 md:top-12 md:right-12 text-[#7A6F62] hover:text-[#1A1A1A] text-xs font-semibold uppercase tracking-[0.25em] transition-colors cursor-pointer"
+          >
+            CLOSE
+          </button>
+
+          {/* Centered Search Panel */}
+          <div className="w-full max-w-[800px] flex flex-col items-center">
+            {/* Input with thin border bottom and centered text */}
+            <input
+              type="text"
+              placeholder="COLLECTION, PRODUCT, ETC"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-transparent border-b border-[#7A6F62]/60 py-4 text-center text-xl md:text-3xl text-[#1A1A1A] font-light uppercase tracking-widest outline-none transition-colors focus:border-[#1A1A1A] placeholder:text-[#7A6F62]/40"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearchSubmit();
+                }
+              }}
+              autoFocus
+            />
+
+            {/* Dark charcoal search button */}
             <button
-              onClick={() => setSearchActive(false)}
-              className="text-[#7A6F62] hover:text-[#1A1A1A] text-xs uppercase tracking-widest font-semibold ml-6"
+              onClick={handleSearchSubmit}
+              className="mt-10 px-16 py-3.5 bg-[#2A2A2A] hover:bg-[#1A1A1A] text-white uppercase text-[11px] font-bold tracking-[0.25em] transition-colors cursor-pointer"
             >
-              Close
+              SEARCH
             </button>
-          </div>
-          <div className="max-w-2xl mx-auto mt-3 text-[11px] text-[#7A6F62] flex gap-2 flex-wrap">
-            <span className="font-semibold text-[#1A1A1A]">Trending:</span>
-            <Link href="/shop?category=sarees" className="hover:text-[#C5A059]">Sarees</Link> &bull;
-            <Link href="/shop?collection=Ae+Ri+Sakhi" className="hover:text-[#C5A059]">Ae Ri Sakhi</Link> &bull;
-            <Link href="/shop?category=anarkalis" className="hover:text-[#C5A059]">Anarkalis</Link> &bull;
-            <Link href="/shop?collection=Shaadmani" className="hover:text-[#C5A059]">Shaadmani</Link>
+
+            {/* Bottom helper categories */}
+            <p className="mt-12 text-[10px] tracking-[0.25em] text-[#7A6F62] uppercase font-bold text-center">
+              TRY SEARCHING FOR: CUSHIONS, ARMCHAIR, COLOUR, CRAFT
+            </p>
           </div>
         </div>
       )}

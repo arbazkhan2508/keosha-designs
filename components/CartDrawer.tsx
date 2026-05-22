@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useCart } from "../context/CartContext";
 import { CartItemRow } from "./cart/CartItemRow";
 import { CheckoutForm } from "./cart/CheckoutForm";
@@ -51,24 +52,25 @@ export const CartDrawer: React.FC = () => {
         onClick={handleClose}
       />
 
-      <div className="absolute inset-y-0 right-0 flex max-w-full pl-10">
-        <div className="w-screen max-w-md transform bg-[#FAF8F5] shadow-2xl transition-transform duration-500 ease-out flex flex-col h-full border-l border-[#E6E2D8]">
+      <div className="absolute inset-y-0 right-0 flex max-w-full">
+        <div className="w-screen max-w-[500px] transform bg-white shadow-2xl transition-transform duration-500 ease-out flex flex-col h-full border-l border-[#E6E2D8]">
           {/* Header */}
-          <div className="px-6 py-5 border-b border-[#E6E2D8] flex items-center justify-between bg-white">
-            <h2 className="text-xl font-serif tracking-wider uppercase text-[#1A1A1A]">
-              {checkoutStep === "cart" && "Your Atelier Cart"}
+          <div className="px-8 py-7 border-b border-[#E6E2D8] flex items-center justify-between bg-white">
+            <h2 className="text-[34px] font-serif tracking-normal text-[#1A1A1A] font-light">
+              {checkoutStep === "cart" && "Cart"}
               {checkoutStep === "shipping" && "Shipping Details"}
               {checkoutStep === "success" && "Order Confirmed"}
             </h2>
             <button
               onClick={handleClose}
-              className="text-[#7A6F62] hover:text-[#1A1A1A] p-1 transition-colors"
+              className="text-[#7A6F62] hover:text-[#1A1A1A] p-2 transition-colors cursor-pointer"
+              aria-label="Close cart"
             >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={1.5}
+                  strokeWidth={1}
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
@@ -76,33 +78,60 @@ export const CartDrawer: React.FC = () => {
           </div>
 
           {/* Cart Contents */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div className="flex-1 overflow-y-auto p-8 space-y-6">
             {checkoutStep === "cart" && (
               <>
                 {cartItems.length === 0 ? (
-                  <div className="h-full flex flex-col items-center justify-center text-center py-16 space-y-4">
+                  /* Empty Cart View matching Image 5 */
+                  <div className="h-full flex flex-col items-center justify-center text-center py-20 px-4 space-y-4">
+                    {/* Cart with Exclamation Mark Icon */}
                     <svg
-                      className="w-12 h-12 text-[#C5A059]/60"
-                      fill="none"
+                      className="w-14 h-14 text-[#1A1A1A]/85 mb-2"
                       viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
+                        d="M3 3H5L6.68 14.39C6.8 15.2 7.5 15.8 8.32 15.8H18.4C19.18 15.8 19.85 15.26 20 14.5L21.8 6.5H6"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                       />
+                      <circle cx="9" cy="20" r="1.5" stroke="currentColor" strokeWidth="1.2" />
+                      <circle cx="18" cy="20" r="1.5" stroke="currentColor" strokeWidth="1.2" />
+                      <path
+                        d="M12 7.5V11"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                      <circle cx="12" cy="13" r="0.75" fill="currentColor" />
                     </svg>
-                    <p className="text-base text-[#7A6F62] tracking-wide">
-                      Your wardrobe is empty.
+
+                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#1A1A1A]">
+                      CART EMPTY
                     </p>
-                    <button
-                      onClick={handleClose}
-                      className="px-6 py-2.5 border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#FCFAF6] text-[#1A1A1A] uppercase text-xs tracking-widest transition-colors font-medium"
-                    >
-                      Browse Shop
-                    </button>
+
+                    <p className="text-[11px] tracking-wider text-[#7A6F62] leading-[1.8] max-w-[280px]">
+                      Your cart is currently empty. Explore{" "}
+                      <Link
+                        href="/shop"
+                        onClick={handleClose}
+                        className="underline hover:text-[#C5A059] transition-colors text-[#7A6F62]"
+                      >
+                        our collections
+                      </Link>{" "}
+                      and{" "}
+                      <Link
+                        href="/shop"
+                        onClick={handleClose}
+                        className="underline hover:text-[#C5A059] transition-colors text-[#7A6F62]"
+                      >
+                        discover something you love
+                      </Link>{" "}
+                      to add to your cart.
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-6">
@@ -139,7 +168,7 @@ export const CartDrawer: React.FC = () => {
 
           {/* Footer controls for Cart Review */}
           {checkoutStep === "cart" && cartItems.length > 0 && (
-            <div className="border-t border-[#E6E2D8] bg-white p-6 space-y-4">
+            <div className="border-t border-[#E6E2D8] bg-white p-8 space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-xs uppercase tracking-widest text-[#7A6F62]">Subtotal</span>
                 <span className="text-lg font-serif font-bold text-[#1A1A1A]">
