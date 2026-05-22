@@ -32,7 +32,7 @@ export const WallCoveringsSection: React.FC = () => {
         <section className="w-full bg-[#F4F1EC] overflow-hidden">
 
             {/* Top Section */}
-            <div className="px-5 md:px-8 lg:px-10 pt-10 md:pt-12">
+            <div className="max-w-7xl mx-auto px-4 lg:px-6 pt-10 md:pt-12">
 
                 {/* Heading */}
                 <h2 className="font-serif text-[#25231F] text-2xl md:text-3xl lg:text-4xl leading-tight tracking-[-0.03em]">

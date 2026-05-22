@@ -43,7 +43,7 @@ export const OurStoresSection: React.FC = () => {
 
   return (
     <section className="w-full bg-[#FCFAF6] py-16 md:py-24 border-t border-[#E6E2D8] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10">
           
           {/* Left Column - Content & Navigation */}

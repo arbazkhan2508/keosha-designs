@@ -36,7 +36,7 @@ const categories = [
 
 export const CategoryDiscover: React.FC = () => {
   return (
-    <section className="max-w-7xl mx-auto px4 lg:px-6 py-16 w-full space-y-10">
+    <section className="max-w-7xl mx-auto px-4 lg:px-6 py-16 w-full space-y-10">
       <div className="text-left w-full">
         <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl tracking-wide text-[#1A1A1A] font-normal">
           Discover by Category

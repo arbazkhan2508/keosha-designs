@@ -38,7 +38,7 @@ export const SocialGrid: React.FC = () => {
   ];
 
   return (
-    <section className="w-full border-t border-[#E6E2D8] py-20 px-6 max-w-7xl mx-auto">
+    <section className="w-full border-t border-[#E6E2D8] py-20 px-4 lg:px-6 max-w-7xl mx-auto">
       <div className="text-center space-y-2 mb-12">
         <span className="text-xs uppercase tracking-widest text-[#C5A059] font-bold">Social Atelier</span>
         <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl tracking-wide text-[#1A1A1A]">

@@ -53,11 +53,12 @@ export const SpringFablesCollection: React.FC = () => {
     const [activeSlide, setActiveSlide] = useState(1);
 
     return (
-        <section className="w-full bg-[#F4F1EC] py-6 md:py-8 overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6">
+        <section className="w-full bg-[#F4F1EC] py-16 md:py-24 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 lg:px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10">
 
-                {/* Left Section */}
-                <div className="flex flex-col justify-between px-7 md:px-8 py-2">
+                    {/* Left Section */}
+                    <div className="flex flex-col justify-between py-2">
 
                     {/* Heading */}
                     <div>
@@ -120,7 +121,7 @@ export const SpringFablesCollection: React.FC = () => {
                 </div>
 
                 {/* Slider */}
-                <div className="min-w-0 pr-6 md:pr-8">
+                <div className="min-w-0">
 
                     <Swiper
                         loop
@@ -177,6 +178,7 @@ export const SpringFablesCollection: React.FC = () => {
                     </Swiper>
 
                 </div>
+            </div>
             </div>
         </section>
     );

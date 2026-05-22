@@ -13,7 +13,8 @@ import { SpringFablesCollection } from "@/components/home/SpringFablesCollection
 import { PartnerProgramme } from "@/components/home/PartnerProgramme";
 import { WallCoveringsSection } from "@/components/home/WallCoveringsSection";
 import { LegacySection } from "@/components/home/LegacySection";
-import { OurStoresSection } from "@/components/home/OurStoresSection";
+import { OurStoresSection } from "../components/home/OurStoresSection";
+import { FeaturedInSection } from "../components/home/FeaturedInSection";
 
 export default function Home() {
   // Get first 4 products for the homepage showcase
@@ -47,6 +48,9 @@ export default function Home() {
 
       {/* 6. Simulated Instagram Grid */}
       <SocialGrid />
+
+      {/* 7. Featured In Section */}
+      <FeaturedInSection />
     </div>
   );
 }

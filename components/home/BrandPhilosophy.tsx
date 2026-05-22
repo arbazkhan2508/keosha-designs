@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const BrandPhilosophy: React.FC = () => {
   return (
-    <section className="w-full bg-[#FAF8F5] py-20 border-t border-[#E6E2D8] px-6">
+    <section className="w-full bg-[#FAF8F5] py-20 border-t border-[#E6E2D8] px-4 lg:px-6">
       <div className="max-w-4xl mx-auto text-center space-y-6">
         <div className="space-y-2">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C5A059] font-bold block">

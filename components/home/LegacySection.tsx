@@ -14,7 +14,7 @@ export const LegacySection: React.FC = () => {
     return (
         <section className="w-full bg-[#F5F2EE] overflow-hidden">
 
-            <div className="px-5 md:px-8 lg:px-10 py-10 md:py-14">
+            <div className="max-w-7xl mx-auto px-4 lg:px-6 py-10 md:py-14">
 
                 {/* Top Content */}
                 <div className="max-w-[560px]">
