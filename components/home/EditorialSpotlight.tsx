@@ -41,7 +41,7 @@ export const EditorialSpotlight: React.FC = () => {
             </div>
 
             {/* Description */}
-            <p className="max-w-[520px] text-white text-[15px] sm:text-[16px] md:text-[17px] leading-[1.9] font-light tracking-[0.01em]">
+            <p className="max-w-[520px] text-white text-sm sm:text-base leading-[1.9] font-light tracking-[0.01em]">
               Vines wander, florals bloom undisturbed and the story
               unfolds. Every fable begins with wonder and ends with
               memories of childhood.
@@ -51,7 +51,7 @@ export const EditorialSpotlight: React.FC = () => {
             <div className="mt-14 md:mt-16">
               <Link
                 href="/shop?collection=spring-summer-26"
-                className="group inline-flex items-center gap-4 uppercase text-white text-[13px] md:text-[15px] tracking-[0.28em] font-light"
+                className="group inline-flex items-center gap-4 uppercase text-white text-xs md:text-sm tracking-[0.28em] font-light"
               >
                 <span>
                   SHOP SPRING SUMMER’26

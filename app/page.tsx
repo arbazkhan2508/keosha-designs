@@ -13,6 +13,7 @@ import { SpringFablesCollection } from "@/components/home/SpringFablesCollection
 import { PartnerProgramme } from "@/components/home/PartnerProgramme";
 import { WallCoveringsSection } from "@/components/home/WallCoveringsSection";
 import { LegacySection } from "@/components/home/LegacySection";
+import { OurStoresSection } from "@/components/home/OurStoresSection";
 
 export default function Home() {
   // Get first 4 products for the homepage showcase
@@ -37,6 +38,10 @@ export default function Home() {
       <WallCoveringsSection />
 
       <LegacySection />
+
+      {/* Our Stores Section */}
+      <OurStoresSection />
+
       {/* 5. Brand Philosophy & Size Inclusivity */}
       <BrandPhilosophy />
 
