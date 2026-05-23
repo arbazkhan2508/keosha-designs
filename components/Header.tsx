@@ -65,7 +65,8 @@ export const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const isHome = pathname === "/";
-  const isDarkHeader = isHome || isScrolled;
+  const isAuthPage = pathname === "/account" || pathname === "/login" || pathname === "/signup";
+  const isDarkHeader = isHome;
 
   // Handle scroll effect
   useEffect(() => {
@@ -89,8 +90,8 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* Announcement Bar - Hidden on Home page to match reference */}
-      {!isHome && (
+      {/* Announcement Bar - Hidden on Home & Auth pages to match reference */}
+      {!isHome && !isAuthPage && (
         <div className="w-full bg-[#1A2835] text-[#FCFAF6] py-2 text-[10px] uppercase tracking-widest text-center font-medium font-sans">
           Complimentary Shipping Across India &bull; Bespoke Sizing (XS - 6XL) &bull; Handcrafted in Lucknow
         </div>
@@ -103,9 +104,13 @@ export const Header: React.FC = () => {
           ? (isScrolled
             ? "fixed top-0 inset-x-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
             : "absolute top-0 inset-x-0 bg-transparent py-6 text-white")
-          : (isScrolled
-            ? "sticky top-0 inset-x-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
-            : "sticky top-0 inset-x-0 bg-[#FCFAF6] border-b border-[#E6E2D8]/50 py-4 text-[#1A1A1A]")
+          : (isAuthPage
+            ? (isScrolled
+              ? "sticky top-0 inset-x-0 bg-white shadow-sm py-3 border-b border-[#E6E2D8]/50 text-[#1A1A1A]"
+              : "sticky top-0 inset-x-0 bg-transparent py-4 text-[#1A1A1A]")
+            : (isScrolled
+              ? "sticky top-0 inset-x-0 bg-[#FCFAF6] shadow-sm py-3 border-b border-[#E6E2D8]/50 text-[#1A1A1A]"
+              : "sticky top-0 inset-x-0 bg-[#FCFAF6] border-b border-[#E6E2D8]/50 py-4 text-[#1A1A1A]"))
           }`}
       >
         <div className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between font-sans transition-colors duration-500 relative ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}>
@@ -171,7 +176,7 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Central Logo - Always Monogram (Image 1, 2, 4) */}
-          <div 
+          <div
             onMouseEnter={() => setActiveMegaMenu(null)}
             className="lg:static absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 text-center flex items-center justify-center z-10"
           >
@@ -255,7 +260,7 @@ export const Header: React.FC = () => {
 
             {/* Account (Desktop only) */}
             <Link
-              href="/stores"
+              href="/account"
               onMouseEnter={() => setActiveMegaMenu(null)}
               className="hidden lg:block luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
               title="My Account"
@@ -300,17 +305,26 @@ export const Header: React.FC = () => {
 
       {/* Fullscreen Search Overlay (Image 3) */}
       {searchActive && (
-        <div className="fixed inset-0 z-50 bg-[#FCFAF6]/98 backdrop-blur-md flex flex-col justify-center items-center px-6 transition-all duration-300 font-sans shadow-2xl animate-fade-in text-[#1A1A1A]">
+        <div
+          onClick={() => setSearchActive(false)}
+          className="fixed inset-0 z-50 bg-[#FBF9F6]/80 backdrop-blur-lg flex flex-col justify-center items-center px-6 transition-all duration-300 font-sans shadow-2xl animate-fade-in text-[#1A1A1A] cursor-default"
+        >
           {/* Close button in top right */}
           <button
             onClick={() => setSearchActive(false)}
-            className="absolute top-8 right-8 md:top-12 md:right-12 text-[#7A6F62] hover:text-[#1A1A1A] text-xs font-semibold uppercase tracking-[0.25em] transition-colors cursor-pointer"
+            className="absolute top-8 right-8 md:top-12 md:right-12 text-[#7A6F62] hover:text-[#1A1A1A] text-[10px] font-bold uppercase tracking-[0.25em] transition-colors cursor-pointer flex items-center gap-1.5"
           >
-            CLOSE
+            <span>CLOSE</span>
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
 
           {/* Centered Search Panel */}
-          <div className="w-full max-w-[800px] flex flex-col items-center">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-[800px] flex flex-col items-center"
+          >
             {/* Input with thin border bottom and centered text */}
             <input
               type="text"

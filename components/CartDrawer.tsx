@@ -48,12 +48,12 @@ export const CartDrawer: React.FC = () => {
     <div className="fixed inset-0 z-50 overflow-hidden font-sans">
       {/* Background Overlay */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-500"
+        className="absolute inset-0 bg-black/15 backdrop-blur-md transition-opacity duration-500 animate-fade-in"
         onClick={handleClose}
       />
 
-      <div className="absolute inset-y-0 right-0 flex max-w-full">
-        <div className="w-screen max-w-[500px] transform bg-white shadow-2xl transition-transform duration-500 ease-out flex flex-col h-full border-l border-[#E6E2D8]">
+      <div className="absolute inset-y-0 right-0 flex w-full lg:w-1/2 max-w-none">
+        <div className="w-full bg-white shadow-2xl flex flex-col h-full border-l border-[#E6E2D8] animate-slide-in-right">
           {/* Header */}
           <div className="px-8 py-7 border-b border-[#E6E2D8] flex items-center justify-between bg-white">
             <h2 className="text-[34px] font-serif tracking-normal text-[#1A1A1A] font-light">

@@ -6,8 +6,7 @@ import Link from "next/link";
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [isOpenLegal, setIsOpenLegal] = useState(false);
-  const [isOpenCompany, setIsOpenCompany] = useState(false);
+  const [openSection, setOpenSection] = useState<"legal" | "company" | null>(null);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +56,7 @@ export const Footer: React.FC = () => {
       {/* 2. Main Footer Section (Warm Beige Block) */}
       <div className="w-full bg-[#EAE5DE] text-[#2D2D2B] pt-20 pb-16 px-4 lg:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32">
 
             {/* Left Column: Contact info & Socials/Copyright */}
             <div className="flex flex-col space-y-16 lg:space-y-28 justify-between">
@@ -68,14 +67,12 @@ export const Footer: React.FC = () => {
                 </span>
                 <div>
                   <a
-                    href="https://wa.me/919528640429"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="tel:+919818428256"
                     className="group hover:text-[#C5A059] transition-colors duration-300 inline-flex items-center"
                   >
-                    +91 95286 40429
+                    +91 9818428256
                     <svg
-                      className="w-3.5 h-3.5 ml-4 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="w-3.5 h-3.5 ml-2.5 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="1.2"
@@ -87,12 +84,12 @@ export const Footer: React.FC = () => {
                 </div>
                 <div>
                   <a
-                    href="mailto:orders@keoshaindia.com"
+                    href="mailto:care@saritahanda.com"
                     className="group hover:text-[#C5A059] transition-colors duration-300 inline-flex items-center"
                   >
-                    ORDERS@KEOSHAINDIA.COM
+                    CARE@SARITAHANDA.COM
                     <svg
-                      className="w-3.5 h-3.5 ml-4 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="w-3.5 h-3.5 ml-2.5 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="1.2"
@@ -108,7 +105,7 @@ export const Footer: React.FC = () => {
               <div className="flex flex-col space-y-6">
                 <div className="flex items-center space-x-6">
                   <a
-                    href="https://instagram.com/keoshadesigns"
+                    href="https://instagram.com/saritahanda"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[#C5A059] transition-colors duration-300 text-[#2D2D2B]"
@@ -121,19 +118,23 @@ export const Footer: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="https://facebook.com/keoshadesigns"
+                    href="https://facebook.com/saritahanda.homes"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[#C5A059] transition-colors duration-300 text-[#2D2D2B]"
                     aria-label="Facebook"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.2" viewBox="0 0 24 24">
-                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <rect x="2" y="2" width="20" height="20" rx="4" ry="4" />
+                      <path
+                        d="M17 11.5h-3v7.5h-3v-7.5H9.5v-2.5h1.5V7.8c0-1.8 1.1-2.8 2.8-2.8h1.7v2.5h-1c-.8 0-1 .4-1 1v1h2.5l-.5 2.5z"
+                        fill="#EAE5DE"
+                      />
                     </svg>
                   </a>
                 </div>
                 <p className="text-[10px] md:text-xs tracking-[0.22em] opacity-60 font-light uppercase">
-                  &copy;KEOSHA DESIGNS 2026
+                  &copy;SARITA HANDA 2026
                 </p>
               </div>
             </div>
@@ -141,17 +142,17 @@ export const Footer: React.FC = () => {
             {/* Right Column: Accordions & Payment Gateways */}
             <div className="flex flex-col space-y-16 lg:space-y-28 justify-between">
               {/* Accordions / Links Columns */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
 
                 {/* Accordion 1: LEGAL AND POLICY */}
                 <div className="border-b border-[#2D2D2B]/15 pb-5 lg:border-none lg:pb-0">
                   <button
-                    onClick={() => setIsOpenLegal(!isOpenLegal)}
+                    onClick={() => setOpenSection(openSection === "legal" ? null : "legal")}
                     className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none lg:pointer-events-none lg:cursor-default lg:hover:text-[#2D2D2B] lg:py-0 lg:pb-4"
                   >
                     <span>LEGAL AND POLICY</span>
                     <svg
-                      className={`w-3.5 h-3.5 lg:hidden transform transition-transform duration-300 ${isOpenLegal ? "rotate-180" : ""
+                      className={`w-3.5 h-3.5 lg:hidden transform transition-transform duration-300 ${openSection === "legal" ? "rotate-180" : ""
                         }`}
                       fill="none"
                       stroke="currentColor"
@@ -162,23 +163,28 @@ export const Footer: React.FC = () => {
                     </svg>
                   </button>
                   <div
-                    className={`transition-all duration-300 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible ${isOpenLegal ? "max-h-40 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    className={`transition-all duration-300 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible ${openSection === "legal" ? "max-h-48 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
                       }`}
                   >
-                    <ul className="flex flex-col space-y-3.5 text-[10px] md:text-[11px] tracking-[0.2em] uppercase opacity-80 pl-1 pb-2">
+                    <ul className="flex flex-col space-y-3.5 text-[10px] md:text-[11px] tracking-[0.22em] font-light uppercase pb-2">
                       <li>
                         <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Terms of Service
+                          TERMS OF SERVICE
                         </Link>
                       </li>
                       <li>
                         <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Privacy Policy
+                          RETURN AND EXCHANGE POLICY
                         </Link>
                       </li>
                       <li>
                         <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Returns & Alterations
+                          SHIPPING AND DELIVERY POLICY
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
+                          PRIVACY
                         </Link>
                       </li>
                     </ul>
@@ -188,12 +194,12 @@ export const Footer: React.FC = () => {
                 {/* Accordion 2: COMPANY */}
                 <div className="border-b border-[#2D2D2B]/15 pb-5 lg:border-none lg:pb-0">
                   <button
-                    onClick={() => setIsOpenCompany(!isOpenCompany)}
+                    onClick={() => setOpenSection(openSection === "company" ? null : "company")}
                     className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none lg:pointer-events-none lg:cursor-default lg:hover:text-[#2D2D2B] lg:py-0 lg:pb-4"
                   >
                     <span>COMPANY</span>
                     <svg
-                      className={`w-3.5 h-3.5 lg:hidden transform transition-transform duration-300 ${isOpenCompany ? "rotate-180" : ""
+                      className={`w-3.5 h-3.5 lg:hidden transform transition-transform duration-300 ${openSection === "company" ? "rotate-180" : ""
                         }`}
                       fill="none"
                       stroke="currentColor"
@@ -204,39 +210,29 @@ export const Footer: React.FC = () => {
                     </svg>
                   </button>
                   <div
-                    className={`transition-all duration-300 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible ${isOpenCompany ? "max-h-56 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    className={`transition-all duration-300 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible ${openSection === "company" ? "max-h-56 mt-3 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
                       }`}
                   >
-                    <ul className="flex flex-col space-y-3.5 text-[10px] md:text-[11px] tracking-[0.2em] uppercase opacity-80 pl-1 pb-2">
+                    <ul className="flex flex-col space-y-3.5 text-[10px] md:text-[11px] tracking-[0.22em] font-light uppercase pb-2">
                       <li>
                         <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Our Heritage Story
+                          ABOUT
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
+                          TEAM
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/legacy" className="hover:text-[#C5A059] transition-colors duration-300">
+                          CONTACT
                         </Link>
                       </li>
                       <li>
                         <Link href="/stores" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Studio Fittings
+                          STORES
                         </Link>
-                      </li>
-                      <li>
-                        <Link href="/stores" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Size Guidelines
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/shop" className="hover:text-[#C5A059] transition-colors duration-300">
-                          Browse All Catalog
-                        </Link>
-                      </li>
-                      <li>
-                        <a
-                          href="https://wa.me/919528640429"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:text-[#C5A059] transition-colors duration-300"
-                        >
-                          WhatsApp Chat Support
-                        </a>
                       </li>
                     </ul>
                   </div>
@@ -278,10 +274,10 @@ export const Footer: React.FC = () => {
                 </svg>
 
                 {/* AMEX */}
-                <svg className="h-5 md:h-6 w-auto text-[#2D2D2B] opacity-75 hover:opacity-100 transition-opacity" viewBox="0 0 26 15" fill="currentColor">
-                  <rect width="26" height="15" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.2" />
-                  <text x="50%" y="62%" textAnchor="middle" fontSize="6.5" fontWeight="900" fontFamily="sans-serif" letterSpacing="0.3">AMEX</text>
-                </svg>
+                <div className="h-5 md:h-6 w-[34px] bg-[#2D2D2B] text-[#EAE5DE] flex flex-col items-center justify-center rounded-[1.5px] opacity-75 hover:opacity-100 transition-opacity select-none px-0.5 border border-[#2D2D2B]">
+                  <span className="text-[4px] font-sans font-bold uppercase tracking-[0.1em] leading-none">AMERICAN</span>
+                  <span className="text-[4px] font-sans font-bold uppercase tracking-[0.1em] leading-none mt-[1.5px]">EXPRESS</span>
+                </div>
               </div>
             </div>
 
