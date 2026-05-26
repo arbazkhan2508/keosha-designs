@@ -60,9 +60,17 @@ export const Header: React.FC = () => {
   const [activeMegaMenu, setActiveMegaMenu] = useState<"new_in" | "shop" | null>(null);
   const [isStoresOpen, setIsStoresOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileMenuOpenSection, setMobileMenuOpenSection] = useState<"new_in" | "shop" | "stores" | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Reset mobile accordion on drawer close
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      setMobileMenuOpenSection(null);
+    }
+  }, [isMobileMenuOpen]);
 
   const isHome = pathname === "/";
   const isAuthPage = pathname === "/account" || pathname === "/login" || pathname === "/signup";
@@ -100,7 +108,7 @@ export const Header: React.FC = () => {
       {/* Main Sticky/Overlay Header */}
       <header
         onMouseLeave={() => setActiveMegaMenu(null)}
-        className={`w-full z-45 transition-all duration-500 ease-in-out ${isHome
+        className={`w-full z-50 transition-all duration-500 ease-in-out ${isHome
           ? (isScrolled
             ? "fixed top-0 inset-x-0 bg-[#434343] shadow-md py-3 border-b border-white/10 text-white"
             : "absolute top-0 inset-x-0 bg-transparent py-6 text-white")
@@ -156,6 +164,7 @@ export const Header: React.FC = () => {
               onClick={() => setSearchActive(true)}
               onMouseEnter={() => setActiveMegaMenu(null)}
               className="luxury-link inline-block transition-colors py-2 cursor-pointer uppercase hover:text-[#C5A059]"
+              suppressHydrationWarning={true}
             >
               SEARCH
             </button>
@@ -165,6 +174,7 @@ export const Header: React.FC = () => {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`lg:hidden transition-colors hover:text-[#C5A059] ${isDarkHeader ? "text-white" : "text-[#1A1A1A]"}`}
+            suppressHydrationWarning={true}
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {isMobileMenuOpen ? (
@@ -194,6 +204,7 @@ export const Header: React.FC = () => {
               onClick={() => setSearchActive(true)}
               className="lg:hidden transition-colors flex items-center p-1 hover:text-[#C5A059]"
               title="Search Collection"
+              suppressHydrationWarning={true}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -262,7 +273,7 @@ export const Header: React.FC = () => {
             <Link
               href="/account"
               onMouseEnter={() => setActiveMegaMenu(null)}
-              className="hidden lg:block luxury-link inline-block transition-colors py-2 hover:text-[#C5A059]"
+              className="hidden lg:inline-block luxury-link transition-colors py-2 hover:text-[#C5A059]"
               title="My Account"
             >
               ACCOUNT
@@ -272,7 +283,8 @@ export const Header: React.FC = () => {
             <button
               onClick={() => setCartOpen(true)}
               onMouseEnter={() => setActiveMegaMenu(null)}
-              className="hidden lg:block luxury-link inline-block transition-colors py-2 cursor-pointer hover:text-[#C5A059]"
+              className="hidden lg:inline-block luxury-link transition-colors py-2 cursor-pointer hover:text-[#C5A059]"
+              suppressHydrationWarning={true}
             >
               CART ({cartCount})
             </button>
@@ -282,6 +294,7 @@ export const Header: React.FC = () => {
               onClick={() => setCartOpen(true)}
               className="lg:hidden transition-colors flex items-center gap-1.5 p-1 relative hover:text-[#C5A059]"
               title="Shopping Cart"
+              suppressHydrationWarning={true}
             >
               <span className={`text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold font-sans transition-colors ${isDarkHeader ? "bg-white text-[#1A1A1A]" : "bg-[#1A1A1A] text-[#FCFAF6]"
                 }`}>
@@ -307,12 +320,13 @@ export const Header: React.FC = () => {
       {searchActive && (
         <div
           onClick={() => setSearchActive(false)}
-          className="fixed inset-0 z-50 bg-[#FBF9F6]/80 backdrop-blur-lg flex flex-col justify-center items-center px-6 transition-all duration-300 font-sans shadow-2xl animate-fade-in text-[#1A1A1A] cursor-default"
+          className="fixed inset-0 z-[60] bg-[#FBF9F6]/80 backdrop-blur-lg flex flex-col justify-center items-center px-6 transition-all duration-300 font-sans shadow-2xl animate-fade-in text-[#1A1A1A] cursor-default"
         >
           {/* Close button in top right */}
           <button
             onClick={() => setSearchActive(false)}
             className="absolute top-8 right-8 md:top-12 md:right-12 text-[#7A6F62] hover:text-[#1A1A1A] text-[10px] font-bold uppercase tracking-[0.25em] transition-colors cursor-pointer flex items-center gap-1.5"
+            suppressHydrationWarning={true}
           >
             <span>CLOSE</span>
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -338,12 +352,14 @@ export const Header: React.FC = () => {
                 }
               }}
               autoFocus
+              suppressHydrationWarning={true}
             />
 
             {/* Dark charcoal search button */}
             <button
               onClick={handleSearchSubmit}
               className="mt-10 px-16 py-3.5 bg-[#2A2A2A] hover:bg-[#1A1A1A] text-white uppercase text-[11px] font-bold tracking-[0.25em] transition-colors cursor-pointer"
+              suppressHydrationWarning={true}
             >
               SEARCH
             </button>
@@ -358,17 +374,18 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex font-sans">
+        <div className="fixed inset-0 z-[60] lg:hidden flex font-sans">
           {/* Overlay */}
           <div className="fixed inset-0 bg-black/30 backdrop-blur-xs animate-fade-in" onClick={() => setIsMobileMenuOpen(false)} />
 
           {/* Menu Panel */}
           <div className="relative flex flex-col w-4/5 max-w-sm bg-[#FCFAF6] h-full shadow-xl p-6 border-r border-[#E6E2D8] animate-slide-in-left">
-            <div className="flex justify-between items-center pb-6 border-b border-[#E6E2D8]">
+            <div className="flex justify-between items-center pb-6 border-b border-[#E6E2D8] shrink-0">
               <span className="font-serif text-xl tracking-widest text-[#1A1A1A]">KEOSHA</span>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[#7A6F62] hover:text-[#1A1A1A]"
+                className="text-[#7A6F62] hover:text-[#1A1A1A] p-1"
+                suppressHydrationWarning={true}
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -376,30 +393,144 @@ export const Header: React.FC = () => {
               </button>
             </div>
 
-            <nav className="flex-1 py-8 space-y-6 text-sm uppercase tracking-widest font-semibold text-[#1A1A1A]">
-              <div className="space-y-4">
-                <p className="text-xs uppercase tracking-wider text-[#7A6F62] font-bold border-b border-[#E6E2D8] pb-1">Shop Collections</p>
-                <ul className="space-y-2 text-xs pl-2 text-[#7A6F62]">
-                  <li><Link href="/shop" onClick={() => setIsMobileMenuOpen(false)}>All Products</Link></li>
-                  <li><Link href="/shop?category=sarees" onClick={() => setIsMobileMenuOpen(false)}>Sarees</Link></li>
-                  <li><Link href="/shop?category=kurta-sets" onClick={() => setIsMobileMenuOpen(false)}>Kurta Sets</Link></li>
-                  <li><Link href="/shop?category=anarkalis" onClick={() => setIsMobileMenuOpen(false)}>Anarkalis</Link></li>
-                  <li><Link href="/shop?category=shararas" onClick={() => setIsMobileMenuOpen(false)}>Shararas</Link></li>
-                  <li><Link href="/shop?category=co-ords" onClick={() => setIsMobileMenuOpen(false)}>Co-ords & Tunics</Link></li>
-                </ul>
+            {/* Scrollable Nav Content */}
+            <nav className="flex-1 overflow-y-auto pr-1 py-6 space-y-6 text-sm uppercase tracking-widest font-semibold text-[#1A1A1A] hide-scrollbar">
+
+              {/* NEW IN Accordion */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => setMobileMenuOpenSection(mobileMenuOpenSection === "new_in" ? null : "new_in")}
+                  className="w-full flex items-center justify-between text-xs tracking-[0.15em] text-[#1A1A1A] font-bold border-b border-[#E6E2D8] pb-2 text-left"
+                  suppressHydrationWarning={true}
+                >
+                  <span>NEW IN</span>
+                  <svg
+                    className={`w-3.5 h-3.5 transform transition-transform duration-300 ${mobileMenuOpenSection === "new_in" ? "rotate-180 text-[#C5A059]" : "text-[#7A6F62]"}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${mobileMenuOpenSection === "new_in" ? "max-h-60 opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                  <ul className="space-y-2.5 text-xs pl-3 text-[#7A6F62] pb-1 border-l border-[#E6E2D8]/40">
+                    <li><Link href="/shop?category=cushions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Cushions</Link></li>
+                    <li><Link href="/shop?category=bedspreads" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Bedspreads</Link></li>
+                    <li><Link href="/shop?category=furniture" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Furniture</Link></li>
+                    <li><Link href="/shop?category=fabrics" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Fabrics</Link></li>
+                    <li><Link href="/shop?category=decor" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Decor</Link></li>
+                  </ul>
+                </div>
               </div>
 
-              <div className="space-y-4">
-                <p className="text-xs uppercase tracking-wider text-[#7A6F62] font-bold border-b border-[#E6E2D8] pb-1">About</p>
-                <ul className="space-y-2 text-xs pl-2 text-[#7A6F62]">
-                  <li><Link href="/legacy" onClick={() => setIsMobileMenuOpen(false)}>Our Legacy</Link></li>
-                  <li><Link href="/stores" onClick={() => setIsMobileMenuOpen(false)}>Atelier Studios</Link></li>
-                  <li><a href="https://wa.me/919528640429" target="_blank" rel="noopener noreferrer">WhatsApp Care</a></li>
-                </ul>
+              {/* SHOP Accordion */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => setMobileMenuOpenSection(mobileMenuOpenSection === "shop" ? null : "shop")}
+                  className="w-full flex items-center justify-between text-xs tracking-[0.15em] text-[#1A1A1A] font-bold border-b border-[#E6E2D8] pb-2 text-left"
+                  suppressHydrationWarning={true}
+                >
+                  <span>SHOP</span>
+                  <svg
+                    className={`w-3.5 h-3.5 transform transition-transform duration-300 ${mobileMenuOpenSection === "shop" ? "rotate-180 text-[#C5A059]" : "text-[#7A6F62]"}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${mobileMenuOpenSection === "shop" ? "max-h-[360px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                  <ul className="space-y-2.5 text-xs pl-3 text-[#7A6F62] pb-1 border-l border-[#E6E2D8]/40">
+                    <li><Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5 font-semibold text-[#1A1A1A]">All Products</Link></li>
+                    <li><Link href="/shop?category=cushions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Cushions</Link></li>
+                    <li><Link href="/shop?category=bedspreads" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Bedspreads</Link></li>
+                    <li><Link href="/shop?category=furniture" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Furniture</Link></li>
+                    <li><Link href="/shop?category=fabrics" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Fabrics</Link></li>
+                    <li><Link href="/shop?category=decor" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Decor</Link></li>
+                    <li><Link href="/shop?category=gifting" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Gifting</Link></li>
+                    <li><Link href="/shop?category=table-linen" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Table Linen</Link></li>
+                  </ul>
+                </div>
               </div>
+
+              {/* OUR STORES Accordion */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => setMobileMenuOpenSection(mobileMenuOpenSection === "stores" ? null : "stores")}
+                  className="w-full flex items-center justify-between text-xs tracking-[0.15em] text-[#1A1A1A] font-bold border-b border-[#E6E2D8] pb-2 text-left"
+                  suppressHydrationWarning={true}
+                >
+                  <span>OUR STORES</span>
+                  <svg
+                    className={`w-3.5 h-3.5 transform transition-transform duration-300 ${mobileMenuOpenSection === "stores" ? "rotate-180 text-[#C5A059]" : "text-[#7A6F62]"}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${mobileMenuOpenSection === "stores" ? "max-h-[300px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                  <ul className="space-y-2.5 text-[10px] leading-relaxed pl-3 text-[#7A6F62] pb-1 border-l border-[#E6E2D8]/40">
+                    <li><Link href="/stores#delhi-flagship" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Delhi (Flagship Store, Sultanpur)</Link></li>
+                    <li><Link href="/stores#sarita-handa-now" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Sarita Handa Now, Delhi (Sultanpur)</Link></li>
+                    <li><Link href="/stores#delhi-defence-colony" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Delhi (Defence Colony)</Link></li>
+                    <li><Link href="/stores#mumbai-bandra" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Mumbai (Bandra)</Link></li>
+                    <li><Link href="/stores#mumbai-mahalaxmi" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Mumbai (Mahalaxmi)</Link></li>
+                    <li><Link href="/stores#hyderabad" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors block py-0.5">Hyderabad</Link></li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* SEARCH Action Trigger */}
+              <div className="border-b border-[#E6E2D8] pb-3">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setSearchActive(true);
+                  }}
+                  className="w-full text-left text-xs tracking-[0.15em] text-[#1A1A1A] font-bold block"
+                  suppressHydrationWarning={true}
+                >
+                  SEARCH
+                </button>
+              </div>
+
+              {/* CART Action Trigger */}
+              <div className="border-b border-[#E6E2D8] pb-3">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setCartOpen(true);
+                  }}
+                  className="w-full text-left text-xs tracking-[0.15em] text-[#1A1A1A] font-bold flex items-center justify-between"
+                  suppressHydrationWarning={true}
+                >
+                  <span>CART</span>
+                  <span className="text-[10px] w-5 h-5 rounded-full bg-[#1A1A1A] text-[#FCFAF6] flex items-center justify-center font-bold font-sans">
+                    {cartCount}
+                  </span>
+                </button>
+              </div>
+
+              {/* Standalone Pages Links */}
+              <div className="space-y-4 pt-2">
+                <Link href="/account" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors text-xs tracking-[0.15em] font-bold block">
+                  ACCOUNT
+                </Link>
+                <Link href="/legacy" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C5A059] transition-colors text-xs tracking-[0.15em] font-bold block">
+                  OUR LEGACY
+                </Link>
+                <a href="https://wa.me/919528640429" target="_blank" rel="noopener noreferrer" className="hover:text-[#C5A059] transition-colors text-xs tracking-[0.15em] font-bold block">
+                  CUSTOMER CARE
+                </a>
+              </div>
+
             </nav>
 
-            <div className="pt-6 border-t border-[#E6E2D8] text-[10px] text-center text-[#7A6F62]">
+            <div className="pt-6 border-t border-[#E6E2D8] text-[10px] text-center text-[#7A6F62] shrink-0">
               &copy; Keosha Designs Atelier Lucknow.
             </div>
           </div>

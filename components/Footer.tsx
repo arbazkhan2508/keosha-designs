@@ -39,11 +39,13 @@ export const Footer: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="EMAIL"
                     className="bg-transparent w-full text-xs text-white placeholder-white/40 outline-none uppercase tracking-widest"
+                    suppressHydrationWarning={true}
                   />
                 </div>
                 <button
                   type="submit"
                   className="text-xs text-white border-b border-white/40 hover:border-white transition-colors duration-300 py-1 uppercase tracking-widest font-semibold shrink-0"
+                  suppressHydrationWarning={true}
                 >
                   SUBSCRIBE
                 </button>
@@ -149,6 +151,7 @@ export const Footer: React.FC = () => {
                   <button
                     onClick={() => setOpenSection(openSection === "legal" ? null : "legal")}
                     className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none lg:pointer-events-none lg:cursor-default lg:hover:text-[#2D2D2B] lg:py-0 lg:pb-4"
+                    suppressHydrationWarning={true}
                   >
                     <span>LEGAL AND POLICY</span>
                     <svg
@@ -196,6 +199,7 @@ export const Footer: React.FC = () => {
                   <button
                     onClick={() => setOpenSection(openSection === "company" ? null : "company")}
                     className="w-full flex items-center justify-between text-[11px] md:text-xs tracking-[0.22em] font-light uppercase py-3 hover:text-[#C5A059] transition-colors duration-300 focus:outline-none lg:pointer-events-none lg:cursor-default lg:hover:text-[#2D2D2B] lg:py-0 lg:pb-4"
+                    suppressHydrationWarning={true}
                   >
                     <span>COMPANY</span>
                     <svg

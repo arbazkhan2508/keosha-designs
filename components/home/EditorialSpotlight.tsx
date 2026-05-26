@@ -37,6 +37,7 @@ export const EditorialSpotlight: React.FC = () => {
                 fill
                 priority
                 className="object-contain"
+                sizes="(max-width: 768px) 260px, (max-width: 1024px) 300px, 300px"
               />
             </div>
 

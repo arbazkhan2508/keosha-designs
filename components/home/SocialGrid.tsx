@@ -26,7 +26,7 @@ export const SocialGrid: React.FC = () => {
       comments: "72",
     },
     {
-      url: "https://images.unsplash.com/photo-1610030469668-93535c17b6b3?auto=format&fit=crop&q=80&w=400&h=400",
+      url: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=400&h=400",
       likes: "618",
       comments: "30",
     },
@@ -72,6 +72,7 @@ export const SocialGrid: React.FC = () => {
               fill
               className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
               sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+              priority={idx === 0}
             />
             {/* Overlay on hover */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4 text-[#FCFAF6] text-xs font-semibold">

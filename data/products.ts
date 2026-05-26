@@ -326,7 +326,7 @@ export const PRODUCTS: Product[] = [
     fabric: "Georgette Silk with Butter Crepe lining for a perfect drape",
     color: "Crimson Red",
     images: [
-      "https://images.unsplash.com/photo-1610030469668-93535c17b6b3?auto=format&fit=crop&q=80&w=600&h=800",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=600&h=800",
       "https://images.unsplash.com/photo-1605001011156-cbf0b0f67a51?auto=format&fit=crop&q=80&w=600&h=800"
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL", "Custom"],

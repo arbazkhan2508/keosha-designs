@@ -73,6 +73,7 @@ export const SpringFablesCollection: React.FC = () => {
                         <button
                             className="spring-prev group relative z-10 cursor-pointer p-2 flex items-center justify-center pointer-events-auto"
                             aria-label="Previous slide"
+                            suppressHydrationWarning={true}
                         >
                             <svg
                                 className="w-8 h-8 text-[#2D2D2B] transition-transform duration-300 group-hover:-translate-x-1"
@@ -98,6 +99,7 @@ export const SpringFablesCollection: React.FC = () => {
                         <button
                             className="spring-next group relative z-10 cursor-pointer p-2 flex items-center justify-center pointer-events-auto"
                             aria-label="Next slide"
+                            suppressHydrationWarning={true}
                         >
                             <svg
                                 className="w-8 h-8 text-[#2D2D2B] transition-transform duration-300 group-hover:translate-x-1"
